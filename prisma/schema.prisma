@@ -1,0 +1,15 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = "postgresql://postgres:Lzpd0304@localhost:5432/capsula_teste?schema=public"
+}
+
+model mensagem{
+  id String @id @default(uuid())
+  text String
+  created_at DateTime @default(now())
+}
