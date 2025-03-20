@@ -6,13 +6,21 @@ import { useEffect, useState } from "react";
 
 function Home() {
   const [mensagens, setMensagens] = useState([]);
+  const [novaMensagem, setNovaMensagem] = useState("");
 
   async function getMessages() {
     const mensagensFromApi = await api.get("/dashboard");
+    console.log(mensagensFromApi.data);
 
     setMensagens(mensagensFromApi.data);
   }
 
+
+  async function sendMessage() {
+    await api.post("/leaveMessage", {
+      text
+    })
+  }
   useEffect(() => {
     getMessages();
   }, []);
@@ -24,8 +32,14 @@ function Home() {
           <h1>Escreva algo pro futuro: </h1>
           <p>Eu gostaria de ....</p>
 
-          <input type="text" />
-          <button type="button">Enviar</button>
+          <input
+            type="text"
+            value={novaMensagem}
+            onChange={(event) => setNovaMensagem(event.target.value)}
+          />
+          <button type="button" /*onClick={sendMessage}*/>
+            Enviar
+          </button>
         </form>
       </section>
       {mensagens.map((mensagem) => {
