@@ -14,6 +14,10 @@ app.register(cors, {
   allowedHeaders: ["Content-Type", "Authorization"], // Cabeçalhos permitidos
 });
 
+app.get("/", (req, res) => {
+  res.redirect("/leaveMessage");
+});
+
 //listener pra subir o server numa porta
 app.listen({ port: 8080 }, (err, address) => {
   if (err) {
